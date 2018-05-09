@@ -1,0 +1,61 @@
+<div class="side-nav">
+        <div class="l">
+            <img src="../assets/brand.png" alt=""> <a class="logo">Asteriisc</a>  
+      </div>
+     
+        <!-- <div>
+            <a href=""> logout</a>
+        </div> -->
+      </div>
+      <div class="main-page">
+          <div id="main">
+            <div class="q">
+              <span class="i"><i class="fas fa-list"></i></span>
+            </div>
+            <div class="s">
+            <div class="search">
+              <input type="text" class="search1" placeholder="search..." (keypress)="search($event)" [(ngModel)]="searchText">
+                <button class="btn" (click)="searchThis()"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="r">
+                <div class="c">&#709;</div>
+                <div id="results">
+                  <div *ngFor="let r of results">
+                    <a routerLink="/{{r}}">{{r}}</a>
+                  </div>
+                </div>
+            </div>
+            
+          </div>
+              <div class="le">
+            <div class="a nobg">
+          <div class="pic">
+            <img src="../assets/logo.png" alt="">
+          </div>
+          <div class="text"><a>Administrator</a> 
+          </div>  
+          <div class="icon">
+            <span class="ic"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+          </div> 
+        </div>
+        <div class="drop">
+          <div class="account">
+            <p>account</p>
+          </div>
+          <div class="account">
+              <p>settings</p>
+            </div>
+            <div class="account" (click)="logout()">
+                <p>logout</p>
+              </div>
+        </div>
+      </div>
+          
+        </div>
+        <router-outlet></router-outlet>
+        </div>
+      
+      
+
+
+

@@ -1,0 +1,23 @@
+<div class="main-wrapper">
+  <div class="login-page">
+    <div class="login" (keypress)="onenter($event)">
+    <h1>Login</h1>
+    <div class="username">
+      <h3>Username</h3>
+      <span class="icon"><i class="far fa-user"></i>
+      </span>
+      <input class="input1" type="text"  placeholder="Type your username" [(ngModel)]="email" >
+    </div>
+    <div class="password">
+      <h3>Password</h3>
+      <span class="icon"><i class="fas fa-lock"></i></span>
+      <input class="input1" type="password" [(ngModel)]="password" placeholder="Type your password" >
+    </div>
+    <div id="errors"></div>
+    <div class="button" (click)="continue()">
+
+      <a >Continue</a>
+    </div>
+  </div>
+  </div>
+</div>
