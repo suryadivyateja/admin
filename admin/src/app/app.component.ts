@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-
-declare var $:any;
+declare var $: any;
 
 @Component({
   selector: 'app-root',
@@ -9,71 +8,29 @@ declare var $:any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private router:Router) { }
-  categories=['account','settings','logout','aqw'];
+  constructor(private router: Router) { }
+  categories = ['account', 'settings', 'logout', 'aqw'];
   searchText;
-  results=[];
+  results = [];
 
   ngOnInit() {
-    $('.r').css('display','none');
-    $('.q').click(function(){
-      if($('.side-nav').offset().left === 0){
-        if($('.i i').hasClass('fas fa-list')){
-          $('.i i').removeClass('fas fa-list').addClass('fa fa-align-justify');
-        }else{
-          $('.i i').removeClass('fa fa-align-justify').addClass('fas fa-list');
-        }
-        $('.side-nav').animate({'left':'-19vw'},400);
-        $('.main-page').animate({'left':'0','width':'100vw'},400);
-
-      }else{
-        if($('.i i').hasClass('fas fa-list')){
-          $('.i i').removeClass('fas fa-list').addClass('fa fa-align-justify');
-        }else{
-          $('.i i').removeClass('fa fa-align-justify').addClass('fas fa-list');
-        }
-        $('.side-nav').animate({'left':'0'},400);
-        $('.main-page').animate({'left':'19vw','width':'81vw'},400);
+    $('.bars').click(function () {
+      if ($('.main-div').hasClass('col-lg-8')) {
+          $('.sidebar').removeClass('col-lg-4').css({'display': 'none'});
+          $('.main-div').removeClass('col-lg-8').addClass('col-lg-12');
+      } else if ($('.main-div').hasClass('col-lg-12')) {
+          $('.sidebar').css({'display':'block'}).addClass('col-lg-4');
+          $('.main-div').removeClass('col-lg-12').addClass('col-lg-8');
+          
+          
       }
-     })
-     $('.a').click(function(){
-       if($('.fa').hasClass('fa-caret-down')){
-         $('.fa').removeClass('fa-caret-down').addClass('fa-caret-up');
-      }else{
-        $('.fa').removeClass('fa-caret-up').addClass('fa-caret-down');
-
-       }
-       $('.drop').css('margin-top','0').slideToggle();
-       $('.drop').css('display','flex');
-     })
-  }
-  search(event){
-    if(event.keyCode === 13){
-      this.searchThis();
-    }
-  }
-  searchThis(){
-    this.results=[];
-    if(this.searchText !== undefined && this.searchText !== ''){
-    this.results=this.categories.filter((element)=>{
-      return (element.toLowerCase().includes(this.searchText.toLowerCase())) 
-    })
-    if(this.results.length === 0){
-      this.results.push(`no results found for ${this.searchText}`)
-    }
-      $('.r').css('display','flex').delay('5000').slideToggle();
-  }else{
-    this.results.push('please enter a keyword');
-    $('.r').css('display','flex').delay('5000').slideToggle();
-
-
-  }
-  
-
-    console.log(this.results); 
-  }
-  logout(){
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
+  });
+  $('.anc').click(function(){
+      // $('.anc').css('background-color','#162439');
+      $('ul.collapse').css('margin-top','10px').css('width','250px').css('margin-left','-10px').css('padding-left','80px').css('font-size','12px').css('padding-top','10px').css('padding-bottom','5px');
+      $('ul.collapse li').css({
+          marginBottom:'10px'
+      })
+  })
   }
 }

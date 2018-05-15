@@ -6,33 +6,35 @@ const config = require('../config/database');
 const User = require('../models/user/user');
 const org = require('../models/organisation/organisation');
 const Wishlist = require('../models/user/wishlist');
+const sharing = require('../models/user/sharing');
 
 //user registration
 router.post('/register',(req,res)=>{
     User.findOne({email:req.body.email},(err,user)=>{
-        if(err) res.status(500).json({success:false,msg:err});
-       else if(user) res.status(400).json({success:false,msg:'email already exists'});
-       else if(!user){
-           let obj = new User({
-               email:req.body.email,
-               userName:req.body.userName,
-               phone:req.body.phone,
-               password:bcrypt.hashSync(req.body.password,10),
-               status:false
-           });
-           obj.save((err1,u)=>{
-               if(err1) res.status(500).json({success:false,msg:err1});
-               else res.status(202).json({success:true,msg:u});
-           });
-       }
+        if(!user){
+            let obj = new User({
+                email:req.body.email,
+                userName:req.body.userName,
+                phone:req.body.phone,
+                password:bcrypt.hashSync(req.body.password,10),
+                address:req.body.address,
+                status:false
+            });
+            obj.save((err1,u)=>{
+                if(err1) res.status(500).json({success:false,msg:err1});
+                else res.status(202).json({success:true,msg:u});
+            });
+        }
+        else if(user) res.json({success:false,msg:'email already exists'});
+        else  res.status(500).json({success:false,msg:err}); 
+          
     });
 });
 
 //authorize user
 router.post('/user_auth',(req,res)=>{
     User.findOne({email:req.body.email},(err,user)=>{
-        if(err) res.status(500).json({success:false,msg:err});
-        else if(!user) res.status(400).json({success:false,msg:'user not found'});
+        if(!user) res.status(400).json({success:false,msg:'user not found'});
         else if(user){
             bcrypt.compare(req.body.password,user.password,(err1,match)=>{
                 if(err1) res.status(500).json({success:false,msg:err1});
@@ -46,6 +48,8 @@ router.post('/user_auth',(req,res)=>{
                 });
                 }
             });
+        }else{
+            res.status(500).json({success:false,msg:err});
         }
     });
 });
@@ -53,8 +57,7 @@ router.post('/user_auth',(req,res)=>{
 //forgot password
 router.post("/forgot_password", (req, res) => {
     User.findOne({ email: req.body.email }, (err, user) => {
-        if(err) res.json({success:false,msg:err});
-        else if (!user) {
+        if (!user) {
             res.json({ success: false, msg: 'no user registerd with the email provided' });
         } else if(user){
             var password_token = jwt.sign({ email: req.body.email }, config.secret, { expiresIn: '10h' });
@@ -65,6 +68,8 @@ router.post("/forgot_password", (req, res) => {
                     res.json({success:true,msg:password_token})
                 }
             });
+        }else{
+             res.json({success:false,msg:err});
         }
    });
 }); 
@@ -117,10 +122,12 @@ router.post("/authPassword", (req, res, next) => {
 });
 //update user details
 router.post("/update_user_det",(req,res)=>{
-    User.findOne({email:req.body.email},(err,user)=>{
-        if(err) res.json({success:false,msg:err});
+    User.findById({_id:req.body.id},(err,user)=>{
+        if(!user){
+            res.json({success:false,msg:'user not found'});
+        }
         else if(user){
-            User.findByIdAndUpdate({_id:req.body._id},{$set:{
+            User.findByIdAndUpdate({_id:req.body.id},{$set:{
                 firstName:req.body.userName,
                 lastName:req.body.lastName,
                 userName:req.body.userName,
@@ -133,7 +140,7 @@ router.post("/update_user_det",(req,res)=>{
                 if(err1) res.json({success:false,msg:err1});
                 else res.json({success:true,msg:'updated successfully'});
             });
-        }
+        }else res.json({success:false,msg:err});
     });
 });
 //post review
@@ -202,5 +209,45 @@ router.post('/delete_org_from_wishlist',(req,res)=>{
         else res.json({success:true,msg:'deleted successfully'});
     });
 });
+//sharing history 
+router.post('/sharing_history',(req,res)=>{
+    var obj = {
+        id: shortid.generate(),
+        sharing:req.body.sharing
+    };
+    sharing.find({_id:req.body.u_id},(err,data)=>{
+        
+        if(data.length === 0){
+            var s = new sharing({
+                user_id:req.body.user_id,
+                org_id:req.body.org_id,
+            });
+            s.save((er,d)=>{
+                if(d){
+                    console.log(d);
+                    sharing.findByIdAndUpdate({_id:d._id},{$push:{sharings:obj}},(er2,da)=>{
+                        if(er2) res.json({success:false,msg:er2});
+                        else res.json({success:true,msg:da});
+                    });
+                }else res.json({success:false,msg:er});
+            });
+        } else if(data.length > 0){
+            sharing.findByIdAndUpdate({_id:req.body.u_id},{$push:{sharings:obj}},(er3,dat)=>{
+                if(er3) res.json({success:false,msg:er3});
+                else res.json({success:true,msg:dat});
+            });
+        } else{
+            if(err) res.json({success:false,msg:err});
+        }
+    });
+});
+//delete sharing history 
+router.post('/delete_sharing_history',(req,res)=>{
+    sharing.findByIdAndUpdate({_id:req.body._id},{$pull:{sharings:{id:req.body.s_id}}}).exec((err,data)=>{
+        if(err) res.json({success:false,msg:err});
+        else res.json({success:true,msg:'deleted successfully'});
+    });
+});
+
 
 module.exports = router;

@@ -1,0 +1,71 @@
+.m{
+    height: 90vh;
+    overflow: auto;
+    color: #555555;
+    background: #f9f9f9;
+}
+#main{
+    padding: 15px 36px 30px;
+    /* overflow: auto; */
+
+}
+#serr{
+    color: #D8000C;
+    background-color: #FFD2D2;
+    font-size: 13px;
+    
+}
+#message{
+    color: #4F8A10;
+    background-color: #DFF2BF;
+    font-size: 13px;
+    display: none;
+}
+
+.all-right{
+    margin-top: 47px;
+}
+.breadcrumb li {
+    color: #777;
+    cursor: pointer;
+}
+.breadcrumb >.active{
+    color: #8a8a8a;
+    cursor: default;
+}
+.add-new{
+    padding: 15px 36px 30px;
+}
+.panel .panel-heading {
+    background: none;
+    background: transparent;
+    border-bottom: solid #f9f9f9 2px;
+    font-weight: bold;
+    color: #555555;
+    text-transform: uppercase;
+}
+.form-control {
+    border-radius: 0px;
+    background-clip: padding-box;
+    box-shadow: none;
+    border: solid 1px #e8e6e6;
+}
+.text-a{
+    padding: 15px;
+}
+.panel-title{
+    color: #626262;
+}
+#text{
+    border-radius: 5px;
+    resize: none;
+    border: 1px solid #ddd;
+    width: 100%;
+    height: 300px;
+}
+.name{
+    font-size: 100%;
+    color: #959595;
+    font-weight: 400;
+
+}

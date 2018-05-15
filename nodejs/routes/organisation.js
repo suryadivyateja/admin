@@ -3,12 +3,13 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const org = require('../models/organisation/organisation');
+const category = require('../models/organisation/category');
+const enroll = require('../models/organisation/enroll');
 
 //org registration
 router.post('/register_org',(req,res)=>{
     org.findOne({email:req.body.email},(err,user)=>{
-        if(err) res.status(500).json({success:false,msg:err});
-       else if(user) res.status(400).json({success:false,msg:'email already exists'});
+       if(user) res.status(400).json({success:false,msg:'email already exists'});
        else if(!user){
            let obj = new org({
                email:req.body.email,
@@ -16,21 +17,21 @@ router.post('/register_org',(req,res)=>{
                phone:req.body.phone,
                password:bcrypt.hashSync(req.body.password,10),
                address:req.body.address,
+               category_id:req.body.category_id,
                status:false
            });
            obj.save((err1,u)=>{
                if(err1) res.status(500).json({success:false,msg:err1});
                else res.status(202).json({success:true,msg:u});
            });
-       }
+       } else res.status(500).json({success:false,msg:err});
     });
 });
 
 //authorize org
 router.post('/org_auth',(req,res)=>{
     org.findOne({email:req.body.email},(err,user)=>{
-        if(err) res.status(500).json({success:false,msg:err});
-        else if(!user) res.status(400).json({success:false,msg:'organisation not found'});
+        if(!user) res.status(400).json({success:false,msg:'organisation not found'});
         else if(user){
             bcrypt.compare(req.body.password,user.password,(err1,match)=>{
                 if(err1) res.status(500).json({success:false,msg:err1});
@@ -44,15 +45,14 @@ router.post('/org_auth',(req,res)=>{
                 });
                 }
             });
-        }
+        }else res.status(500).json({success:false,msg:err});
     });
 });
 
 //forgot password
 router.post("/forgot_orgPassword", (req, res) => {
     org.findOne({ email: req.body.email }, (err, user) => {
-        if(err) res.json({success:false,msg:err});
-        else if (!user) {
+         if (!user) {
             res.json({ success: false, msg: 'no organisation registerd with the email provided' });
         } else if(user){
             var password_token = jwt.sign({ email: req.body.email }, config.secret, { expiresIn: '10h' });
@@ -63,7 +63,7 @@ router.post("/forgot_orgPassword", (req, res) => {
                     res.json({success:true,msg:password_token})
                 }
             });
-        }
+        }else res.json({success:false,msg:err});
    });
 }); 
 
@@ -127,9 +127,69 @@ router.get('/delete_org/:id',(req,res)=>{
     org.findByIdAndRemove({_id:req.params.id},(err,data)=>{
         if(err) res.json({success:false,msg:err});
         else res.json({success:true,msg:'successfully deleted'});
+    });
+});
+// add an category
+router.post('/post_category',(req,res)=>{
+    category.findOne({cat_name:req.body.cat_name},(err,data)=>{
+        
+        if(data) res.json({success:false,msg:'category already exists'});
+        else if(!data){
+            var obj = new category({
+                cat_name : req.body.cat_name,
+                picture : req.body.picture,
+                description : req.body.description
+            });
+            obj.save((err1,c)=>{
+                if(err1) res.json({success:false,msg:err1});
+                else res.json({success:true,msg:c});
+            });
+        }else res.json({success:false,msg:err});
+    });
+});
+//get all category
+router.get('/get_all_categories',(req,res)=>{
+    category.find({},(err,data)=>{
+        if(err) res.json({success:false,msg:err});
+        else res.json({success:true,msg:data});
+    });
+});
+//get category by id
+router.get('/get_category_by_id/:id',(req,res)=>{
+    category.findById({_id:req.params.id},(err,data)=>{
+        if(err) res.json({success:false,msg:err});
+        else if(data) res.json({success:true,msg:data});
+    });
+});
+//edit category
+router.post('/edit_category',(req,res)=>{
+    category.findByIdAndUpdate({_id:req.body.id},{$set:{cat_name:req.body.cat_name,picture:req.body.cat_picture,
+    description:req.body.description}}).exec((err,data)=>{
+        if(err) res.json({success:false,msg:err});
+        else res.json({success:true,msg:'updated successfully'});
     })
 })
-
+//enroll organisation
+router.post('/enroll_org',(req,res)=>{
+    var obj = new enroll({
+        org_name:req.body.org_name,
+        email:req.body.email,
+        phone:req.body.phone,
+        address:req.body.address,
+        description:req.body.description
+    });
+    obj.save((err,data)=>{
+        if(err) res.json({success:false,msg:err});
+        else res.json({success:true,msg:data});
+    });
+});
+//delete enrolled organisation
+router.get('/delete_enrolled/:id',(req,res)=>{
+    enroll.findByIdAndRemove({_id:req.params.id},(err,data)=>{
+        if(err) res.json({success:false,msg:err});
+        else res.json({success:true,msg:'deleted successfully'});
+    });
+});
 
 
 

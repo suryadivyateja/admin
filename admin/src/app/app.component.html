@@ -1,61 +1,147 @@
-<div class="side-nav">
-        <div class="l">
-            <img src="../assets/brand.png" alt=""> <a class="logo">Asteriisc</a>  
-      </div>
-     
-        <!-- <div>
-            <a href=""> logout</a>
-        </div> -->
-      </div>
-      <div class="main-page">
-          <div id="main">
-            <div class="q">
-              <span class="i"><i class="fas fa-list"></i></span>
-            </div>
-            <div class="s">
-            <div class="search">
-              <input type="text" class="search1" placeholder="search..." (keypress)="search($event)" [(ngModel)]="searchText">
-                <button class="btn" (click)="searchThis()"><i class="fas fa-search"></i></button>
-            </div>
-            <div class="r">
-                <div class="c">&#709;</div>
-                <div id="results">
-                  <div *ngFor="let r of results">
-                    <a routerLink="/{{r}}">{{r}}</a>
-                  </div>
+<div class="container-fluid">
+    <div class="row nop">
+        <div class="sidebar col-lg-4">
+            <div class="top">
+                <div class="logo-img">
+                    <img src="../assets/brand.png" alt="" width="35" height="35">
                 </div>
+                <p>Asteriisc</p>
             </div>
-            
-          </div>
-              <div class="le">
-            <div class="a nobg">
-          <div class="pic">
-            <img src="../assets/logo.png" alt="">
-          </div>
-          <div class="text"><a>Administrator</a> 
-          </div>  
-          <div class="icon">
-            <span class="ic"><i class="fa fa-caret-down" aria-hidden="true"></i></span>
-          </div> 
-        </div>
-        <div class="drop">
-          <div class="account">
-            <p>account</p>
-          </div>
-          <div class="account">
-              <p>settings</p>
+            <div class="main">
+                <ul class="list-unstyled components">
+                    <li class="active q">
+
+                        <!-- Link with dropdown items -->
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="anc anc1">
+                            <span class="ico">
+                                <i class="fa fa-user "></i>
+                            </span> Users
+                            <span class="pull-right">
+                                <i class="fa fa-sort-down "></i>
+                            </span>
+                        </a>
+
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li>
+                                <a routerLink="/all-users">All Users</a>
+                            </li>
+                            <li>
+                                <a routerLink="/add-user">Add User</a>
+                            </li>                        
+                        </ul>
+
+                    </li>
+                    <li class="q">
+
+                        <a href="#adminSubmenu" data-toggle="collapse" aria-expanded="false">
+                            <span class="ico">
+                                <i class="fa fa-user-circle"></i>
+                                <!-- Link with dropdown items -->
+                            </span> Admin
+                            <span class="pull-right">
+                                <i class="fa fa-sort-down"></i>
+                            </span>
+                        </a>
+
+                        <ul class="collapse list-unstyled" id="adminSubmenu">
+                            <li>
+                                <a href="#">Page</a>
+                            </li>
+                            <li>
+                                <a href="#">Page</a>
+                            </li>
+                            <li>
+                                <a href="#">Page</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li class="q">
+
+                        <!-- Link with dropdown items -->
+                        <a href="#orgSubmenu" data-toggle="collapse" aria-expanded="false">
+                            <span class="ico">
+                                <i class="fa fa-sitemap"></i>
+                            </span> Organization
+                            <span class="pull-right">
+                                <i class="fa fa-sort-down"></i>
+                            </span>
+                        </a>
+                        <ul class="collapse list-unstyled" id="orgSubmenu">
+                            <li>
+                                <a href="#">Page</a>
+                            </li>
+                            <li>
+                                <a href="#">Page</a>
+                            </li>
+                            <li>
+                                <a href="#">Page</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li class="q">
+                        <!-- Link with dropdown items -->
+                        <a href="#catSubmenu" data-toggle="collapse" aria-expanded="false">
+                            <span class="ico">
+                                <i class="fa fa-sitemap"></i>
+                            </span> Categories
+                            <span class="pull-right">
+                                <i class="fa fa-sort-down"></i>
+                            </span>
+                        </a>
+
+                        <ul class="collapse list-unstyled" id="catSubmenu">
+                            <li>
+                                <a href="#">Page</a>
+                            </li>
+                            <li>
+                                <a href="#">Page</a>
+                            </li>
+                            <li>
+                                <a href="#">Page</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
             </div>
-            <div class="account" (click)="logout()">
-                <p>logout</p>
-              </div>
         </div>
-      </div>
-          
-        </div>
-        <router-outlet></router-outlet>
-        </div>
-      
-      
+
+        <div class="main-div  col-lg-8">
+            <div class="navi">
+            <div class="col-md-3 bars">
+                <i class="fa fa-bars"></i>
+            </div>
+            <div class="col-md-5 search">
+                <div class="search-ico">
+                        <i class="fa fa-search"></i>
+                </div>
+                <input type="text" placeholder="Search..">
+            </div>
+            <div class="col-md-4 ">
+                <div class="dropdown pull-right drop">
+                    <button class="btn dropdown-toggle" type="button" data-toggle="dropdown">Admin
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#">Setting</a>
+                        </li>
+                        <li class="divider">
+                        </li>
+                        <li>
+                            <a href="#">Logout</a>
+                        </li>
+                    </ul>
+                </div>
 
 
-
+            </div>
+        </div>
+        <div class="cont">
+            <router-outlet></router-outlet>
+        </div>
+        </div>
+    </div>
+</div>

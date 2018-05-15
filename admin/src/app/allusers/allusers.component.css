@@ -1,0 +1,149 @@
+.m{
+    height: 90vh;
+    overflow: auto;
+    color: #555555;
+    background: #f9f9f9;
+}
+#main{
+    padding: 15px 36px 30px;
+    overflow: auto;
+}
+.breadcrumb li {
+    color: #777;
+    cursor: pointer;
+}
+.breadcrumb >.active{
+    color: #8a8a8a;
+    cursor: default;
+}
+.all-right{
+    margin-top: 47px;
+}
+ .bordered-panel{
+    border-right: solid 4px #edb758;
+    height: 300px;
+}
+.panel-heading {
+    padding: 0px !important;
+}
+
+.top-user{
+    margin-bottom: 15px;
+    margin-left: -15px;
+    
+}
+
+.label-danger {
+    background-color: #bd5151;
+    border-color: transparent;
+    color: #ffffff
+}
+.panel-title{
+    font-size: 16px;
+    color: inherit;
+}
+input.labelauty.tiny + label {
+    height: 20px;
+    width: 20px;
+    padding: 2px 4px;
+}
+input.labelauty + label {
+    display: inline-block;
+    font-size: 11px;
+    padding: 6px;
+    background-color: #f1f0f0;
+    color: #b3b3b3;
+    cursor: pointer;
+    border-radius: 3px;
+    background-clip: padding-box;
+    transition: background-color 250ms linear;
+    height: 28px;
+    width: 28px;
+    margin-bottom: 0px;
+    margin-right: 5px
+}
+span{
+    color: white;
+}
+.margin-bottom-30 {
+    margin-bottom: 30px;
+}
+.users-table .picture {
+    width: 60px;
+}
+.users-table .img-container {
+    width: 50px;
+    height: 50px;
+    overflow: hidden;
+    border-radius: 100px;
+    background-clip: padding-box;
+}
+.users-table .img-container img {
+    min-height: 50px;
+    min-width: 50px;
+    max-height: 50px;
+    width: auto;
+}
+a:hover, a:visited, a:active {
+    text-decoration: none!important;
+}
+.label {
+    font-weight: 300;
+    padding: 3px 3px 2px;
+}
+.back-pop{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: linear-gradient(rgba(0,0,0,0.1));
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 15;
+}
+.main{
+    width: 40%;
+    height: 50%;
+    background: white;
+}
+#message{
+    color: #4F8A10;
+    background-color: #DFF2BF;
+    font-size: 13px;
+    display: none;
+}
+.head{
+    width: 100%;
+    height: 20%;
+    background: #f7f7f7;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:black;
+    text-transform: capitalize;
+
+}
+.head p{
+    font-size: 20px;
+    font-weight: 400;
+}
+.main-part{
+    width: 100%;
+    height: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main-part p{
+    font-size: 16px;
+}
+.footer{
+    border-top: 1px solid #ddd;
+    background: #f7f7f7;
+    width: 100%;
+    height: 20%;
+    padding: 10px;
+}

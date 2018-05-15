@@ -1,0 +1,36 @@
+<div class="m">
+    <section id="main">
+      <div class="row">
+          <div class="col-sm-8">
+            <div id="message"></div>
+            <div id="serr"></div>
+              <h1>Add-Category</h1>
+          </div>
+          <div class="col-sm-4">
+                  <ol class="breadcrumb all-right pull-right">
+                          <li>Home</li>
+                          <li>Categories</li>
+                          <li class="active">Add Category</li>
+                        </ol>
+          </div>
+      </div>
+    </section>
+    <section id="add-new">
+    <div class="container-fluid">
+    <div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Category Name *</label>
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-tag"></i>
+              </span>
+              <input type="text" class="form-control name" name="cat_name" [(ngModel)]="cat_name" (keypress)="key($event)">
+            </div>
+          </div>
+          <div class="form-group">
+              <label for="exampleInputEmail1" class="name"> Description</label>
+              <textarea name="description" style="min-width:100%" id="text" class="form-control"  (keypress)="key($event)" [(ngModel)]="description"></textarea>
+            </div>
+            <br>
+            <a class="btn btn-primary" (click)="submit()">Submit</a>
+    </div>

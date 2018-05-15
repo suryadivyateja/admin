@@ -35,6 +35,10 @@ const org_schema = mongoose.Schema({
     },
     users:{
         type:Array
+    },
+    category_id:{
+        type:String,
+        required:true
     }
 });
 
