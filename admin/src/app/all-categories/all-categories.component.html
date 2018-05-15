@@ -1,3 +1,76 @@
-<p>
-  all-categories works!
-</p>
+<div class="m">
+  <section id="main">
+     <div class="row">
+         <div class="col-sm-8">
+             <div id="message"></div>
+             <h1>All-categories</h1>
+             <p>There are {{l}} registered users</p>
+         </div>
+         <div class="col-sm-4 ">
+             <ol class="breadcrumb all-right pull-right">
+                 <li>Home</li>
+                 <li>Categories</li>
+                 <li class="active">All Categories</li>
+             </ol>
+         </div>
+     </div>
+ </section>
+ 
+ <section id="main">
+     <div class="container-fluid">
+         <div class="row">
+             <div class="col-sm-12">
+                 <div class="btn-group margin-bottom-30 pull-right">
+                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                           New Category 
+                         </button>
+                 </div>
+                 <table class="table users-table table-hover">
+                     <tbody>
+                         <tr *ngFor="let c of categories let i = index">
+                            <td class="useremail hidden-xs">
+                                <div>{{i+1}}</div>
+                            </td>
+                             <td class="username">
+                                 <div><a href="profile.php">{{c.cat_name}}</a></div>
+                                 <div><span class="label label-danger">Category</span></div>
+                             </td>
+                             <td class="userevents text-right">
+                                 <a class="btn btn-xs btn-primary" routerLink="/edit_category/{{c._id}}">edit</a>
+                                 <a class="delete-btn btn btn-xs btn-danger" (click)="delete(c)">delete</a>
+                                 <div class="back-pop">
+                                         <div class="main">
+                                             <div class="head">
+                                                 <p>delete user</p>
+                                             </div>
+                                             <div class="main-part">
+                                                 <p>
+                                                     Are you sure to delete this category ?
+                                                 </p>
+                                                 
+                                             </div>
+                                             <div class="footer">
+                                                 
+                                                     <div class="pull-right">
+                                                         <a class="btn btn-danger btn-md" (click)="delete_this()">Delete</a> |
+                                                         <a class="btn btn-default" (click)="cancel()">Cancel</a> 
+                                                         
+                                                     </div>
+                                                 
+                                             </div>
+                                         </div>
+                                     </div>
+                             </td>
+                             
+                         </tr>
+ 
+                        
+                     </tbody>
+                 </table>
+ 
+             </div>
+         </div>
+        
+     </div>
+ </section>
+ </div>

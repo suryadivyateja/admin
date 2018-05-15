@@ -1,0 +1,108 @@
+<div class="m">
+    <section id="main">
+       <div class="row">
+           <div class="col-sm-8">
+               <div id="message"></div>
+               <h1>All-Organisations</h1>
+               <p>There are {{l}} registered organisations</p>
+           </div>
+           <div class="col-sm-4 ">
+               <ol class="breadcrumb all-right pull-right">
+                   <li>Home</li>
+                   <li>Organisations</li>
+                   <li class="active">Add Organisation</li>
+               </ol>
+           </div>
+       </div>
+   </section>
+   
+   <section id="main">
+       <div class="container-fluid">
+           <div class="row">
+               <div class="col-sm-3 side-p">
+                   <section class=" bordered-panel">
+                       <header class="panel-heading">
+                           <h3 class="panel-title">FILTER BY STATUS</h3>
+                       </header>
+                       <div class="panel-body">
+                           <div class="top-user">
+                               <label for="admin-checkbox" class="label-primary form-control">
+                           <input type="checkbox" class="tiny checkbox-danger labelauty">
+                             <span>Active</span>  
+                          </label>
+                           </div>
+                           <div class="top-user">
+                               <label for="admin-checkbox" class="label-danger form-control">
+                                   <input type="checkbox" class="tiny checkbox-danger labelauty">
+                                     <span>In Active</span>  
+                                  </label>
+                           </div>
+                       </div>
+                   </section>
+               </div>
+               <div class="col-sm-9">
+                   <div class="btn-group margin-bottom-30 pull-right">
+                       <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                             New Organisation
+                           </button>
+                   </div>
+   
+   
+                   <table class="table users-table table-hover">
+                       <tbody>
+   
+                           <tr *ngFor="let o of organisations">
+                               <th class="picture" scope="row">
+                                   <div class="img-container">
+                                       <img src="../../assets/user.png" alt="">
+                                   </div>
+                               </th>
+                               <td class="username">
+                                   <div><a href="profile.php">{{o.name}}</a></div>
+                                   <div><span class="label label-success">Organisation</span></div>
+                               </td>
+                               <td class="useremail hidden-xs">
+                                   <div>{{o.email}}</div>
+                               </td>
+                               <td class="userphone hidden-xs">
+                                   <div>{{o.phone}}</div>
+                               </td>
+                               <td class="userevents text-right">
+                                   <a class="btn btn-xs btn-primary" routerLink="/edit_organisation/{{o._id}}">edit</a>
+                                   <a class="delete-btn btn btn-xs btn-danger" (click)="delete(o)">delete</a>
+                                   <div class="back-pop">
+                                           <div class="main">
+                                               <div class="head">
+                                                   <p>delete organisation</p>
+                                               </div>
+                                               <div class="main-part">
+                                                   <p>
+                                                       Are you sure to delete this organisation ?
+                                                   </p>
+                                                   
+                                               </div>
+                                               <div class="footer">
+                                                   
+                                                       <div class="pull-right">
+                                                           <a class="btn btn-danger btn-md" (click)="delete_this()">Delete</a> |
+                                                           <a class="btn btn-default" (click)="cancel()">Cancel</a> 
+                                                           
+                                                       </div>
+                                                   
+                                               </div>
+                                           </div>
+                                       </div>
+                               </td>
+                               
+                           </tr>
+   
+                          
+                       </tbody>
+                   </table>
+   
+               </div>
+           </div>
+          
+       </div>
+   </section>
+   </div>

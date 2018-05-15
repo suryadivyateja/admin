@@ -8,6 +8,7 @@ const enroll = require('../models/organisation/enroll');
 
 //org registration
 router.post('/register_org',(req,res)=>{
+    console.log(req.body);
     org.findOne({email:req.body.email},(err,user)=>{
        if(user) res.status(400).json({success:false,msg:'email already exists'});
        else if(!user){
@@ -83,7 +84,7 @@ router.post('/verifyToken_org', (req, res, next) => {
 });
 //find org by id
 router.get('/find_org_by_id/:id',(req,res)=>{
-    org.findById({_id:req.params.id},(err,o)=>{
+    org.findById({_id:req.params.id}).populate('category').exec((err,o)=>{
         if(err) res.json({success:false,msg:err});
         else res.json({success:true,msg:o}); 
     })
@@ -95,7 +96,13 @@ router.get('/find_org_by_email/:email',(req,res)=>{
         else res.json({success:true,msg:user});
     });
 });
-
+//get all organisations
+router.get('/get_all_orgs',(req,res)=>{
+    org.find({},(err,data)=>{
+        if(err) res.json({success:false,msg:err});
+        else res.json({success:true,msg:data});
+    })
+})
 //update password
 router.post("/authPassword_org", (req, res, next) => {
 
@@ -111,6 +118,27 @@ router.post("/authPassword_org", (req, res, next) => {
                 else res.json({success:true,msg:'password changed successfully'});
         });
     }
+    });
+});
+router.post("/update_org_det",(req,res)=>{
+    console.log(req.body);
+    org.findById({_id:req.body.id},(err,user)=>{
+        if(!user){
+            res.json({success:false,msg:'user not found'});
+        }
+        else if(user){
+            org.findByIdAndUpdate({_id:req.body.id},{$set:{
+                name:req.body.name,
+                email:req.body.email,
+                phone:req.body.phone,
+                address:req.body.address,
+                category_id:req.body.category_id,
+                picture:req.body.picture 
+            }}).exec((err1,data)=>{
+                if(err1) res.json({success:false,msg:err1});
+                else res.json({success:true,msg:'updated successfully'});
+            });
+        }else res.json({success:false,msg:err});
     });
 });
 //get all reviews by organisation
@@ -159,6 +187,20 @@ router.get('/get_category_by_id/:id',(req,res)=>{
     category.findById({_id:req.params.id},(err,data)=>{
         if(err) res.json({success:false,msg:err});
         else if(data) res.json({success:true,msg:data});
+    });
+});
+//get category by name
+router.get('/get_category_by_name/:name',(req,res)=>{
+    category.findOne({cat_name:req.params.name},(err,data)=>{
+        if(err) res.json({success:false,msg:err});
+        else if(data) res.json({success:true,msg:data});
+    });
+});
+//delete category
+router.get('/delete_category/:id',(req,res)=>{
+    category.findByIdAndRemove({_id:req.params.id},(err,data)=>{
+        if(err) res.json({success:false,msg:err});
+        else res.json({success:true,msg:'succcessfully deleted'});
     });
 });
 //edit category

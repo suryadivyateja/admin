@@ -13,7 +13,7 @@ export class AllusersComponent implements OnInit {
    }
    users=[];
    l;
-ur;
+   ur;
   ngOnInit() {
     this.adminService.getAllUsers().subscribe(res=>{
 if(res.success === true){

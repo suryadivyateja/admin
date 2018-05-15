@@ -40,6 +40,18 @@ const org_schema = mongoose.Schema({
         type:String,
         required:true
     }
-});
+},{
+    toObject: {
+    virtuals: true
+    },
+    toJSON: {
+    virtuals: true 
+    }
+  });
 
+  org_schema.virtual('category',{
+      ref:'category',
+      localField:'category_id',
+      foreignField:'_id'
+  })
 const org = module.exports = mongoose.model('org',org_schema);
