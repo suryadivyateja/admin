@@ -142,7 +142,7 @@ a{
     display: flex;
     /* background-color: black; */
      background:  url('../assets/sign.jpeg');
-     background-position: 72%;
+     background-position: 100%;
 
 }
 .main::before{
@@ -154,68 +154,65 @@ a{
     height: 70%;
     background: #ae3c4261;
 }
-.si{
+.s{
     width: 50%;
-    height: 100%;
-    padding: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    z-index: 20;;
 }
-.si a.sin{
-    margin-bottom: 10%;
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-}
-.input-group-addon{
-    font-size: 20px;
-    color: white;
-    margin-right: 3%;
-}
-.si .form-control{
+.si{
+    position: absolute;
     background: #EDE6EF;
-    border: none;
-    outline: none;
-    border-radius: 5px;
-    width: 90%;
+    height: 80%;
+    width: 25%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 20;
+    top:10%;
 }
-a.b{
-    font-size: 14px;
-    width: 40%;
-    margin-bottom: 1%;
-    background: #3897c1;
-    color: white;
-    font-weight: 500;
+.si div{
+    height: 15%;
+    width: 100%;
+    margin-bottom: 20px;
+    
+}
+.f{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 0px;
 }
 a.fo{
-    color: RED;
+    /* margin-top: -6%; */
+    /* margin-bottom: 2%; */
+    color: red;
     font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 1%;
+}
+a.ne{
+    margin-top: 1%;
+    color: green;
+}
+a.b{
+    width: 100%;
+    background: #3897c1;
+    color: white;
 }
 h6{
-    color: white;
-    margin-bottom: 2%;
+    margin-top: 2%;
+    text-align: center;
 }
-a.btn-block{
-    padding: 5px;
-    width: 50%;
+a.btn.btn-block.btn-facebook{
     background: #3B5998;
     color: white;
-
 }
-i.fa.fa-google {
-    margin-left: -15px;
-    margin-right: 5px;
-}
-a.btn-block.btn-google{
-    /* padding: 5px; */
-    width: 50%;
+a.btn.btn-block.btn-google{
     background: #DD4B39;
     color: white;
+}
+i.fa.fa-facebook.fa-fw {
+    margin-right: 10px;
+}
+i.fa.fa-google{
+    margin-right: 10px;
 }
 .ri{
     width: 50%;
@@ -230,7 +227,7 @@ a.btn-block.btn-google{
 }
 .re1{
     position: absolute;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     background: #EDE6EF;
@@ -243,7 +240,7 @@ a.btn-block.btn-google{
 }
 .re{
     position: absolute;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     background: #EDE6EF;
@@ -294,6 +291,12 @@ a.btn-block.btn-google{
     color: #fff;
 }
 a.su{
+    color: #211020;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 2%;
+}
+a.sin{
     color: #211020;
     font-size: 16px;
     font-weight: 600;

@@ -42,17 +42,30 @@ qe=[];
     $('#serr').html('');
     $('#ser').html('');
     $('.back-pop').css('display','flex');
+    $('.si').css('display','flex');
+    $('.re').css('display','none');
   }
   open1(){
     $('#o_serr').html('');
     $('#o_ser').html('');
     $('.back-pop1').css('display','flex');
+    $('.si').css('display','flex');
+    $('.re1').css('display','none');
+   
   }
   close(){
     $('.back-pop').css('display','none');
   }
   close1(){
     $('.back-pop1').css('display','none');
+  }
+  open_re(){
+    $('.si').css('display','none');
+    $('.re').css('display','flex');
+  }
+  open_re1(){
+    $('.si').css('display','none');
+    $('.re1').css('display','flex');
   }
   signin(){
     this.qe=[];
@@ -65,7 +78,7 @@ qe=[];
       this.userService.authenticateUser(obj).subscribe(res=>{
         console.log(res);
       if(res.success === false){
-        $('#serr').html(res.msg).css('margin-top','-10px').css('margin-bottom','5px');
+        $('#serr').html(res.msg).css('margin-top','-5px').css('margin-bottom','5px');
       }
       else {
         localStorage.setItem('token',res.token);
@@ -80,11 +93,11 @@ qe=[];
     }else{
       switch (false) {
         case this.validateService.validateInput(this.u_s_email):
-        $('#serr').html('please enter your email address').css('margin-top','-10px')
+        $('#serr').html('please enter your email address').css('margin-top','-5px')
         .css('margin-bottom','5px');
           break;
           case this.validateService.validateInput(this.u_s_password):
-          $('#serr').html('please enter the password').css('margin-top','-10px')
+          $('#serr').html('please enter the password').css('margin-top','-5px')
           .css('margin-bottom','5px');
             break;
       

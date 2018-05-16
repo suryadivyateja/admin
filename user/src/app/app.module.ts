@@ -10,15 +10,21 @@ import { UserService } from './services/user.service';
 
 import { AppComponent } from './app.component';
 import { OrgService } from './services/org.service';
+import { HomeComponent } from './home/home.component';
 
+const routes:Routes = [
+  {path:'',redirectTo:'/home',pathMatch:'full'},
+  {path:'home',component:HomeComponent}
+]
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule,
+    RouterModule.forRoot(routes),
     FormsModule,
     HttpModule
   ],

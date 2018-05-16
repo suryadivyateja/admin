@@ -12,6 +12,11 @@ export class UserService {
   loggedIn() {
     return tokenNotExpired();
   }
+  getLocation(lat: number, long: number) {
+    // tslint:disable-next-line:max-line-length
+    return this.http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + ',' + long + '&key=AIzaSyA87IC9OaLzSxRfYOFjVzXF6ObsDGYFWeQ').map
+        ((response) => response.json());
+}
   authenticateUser(obj) {
     const header = new Headers();
     header.append('content-type', 'application/json');
