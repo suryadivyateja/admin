@@ -31,7 +31,7 @@
       </div>
       <a href="" class="btn b">SIGN IN</a>
       <a href="" class="fo">Forgot Your Password</a>
-      <h5>OR</h5>
+      <h6>OR</h6>
       <a class="btn btn-block btn-social btn-facebook">
           <i class="fa fa-facebook fa-fw"></i> Sign in with Facebook
           </a>
@@ -41,42 +41,45 @@
     </div>
     <div class="ri">
       <div class="r"></div>
+      <div class="exi">
+        <i class="fa fa-times-circle"></i>
+      </div>
       <div class="re">
         <a href="" class="su">SIGN UP</a>
         <div>
             <label for="exampleInputName" class="name">Name * </label>
             
-              <input type="text" class="form-control name" name="name" (keypress)="key($event)">
+              <input type="text" class="form-control name" name="name" placeholder="Name" (keypress)="key($event)">
             </div>
 
           <div>
             <label for="exampleInputEmail1" class="name">Email *</label>
             
-              <input type="email" class="form-control email" name="email" (keypress)="key($event)">
+              <input type="email" class="form-control email" name="email" placeholder="example@yourmail.com " (keypress)="key($event)">
             
           </div>
 
           <div>
             <label for="exampleInputEmail1" class="name">Phone *</label>
             
-              <input type="number" class="form-control phone" name="phone" (keypress)="key($event)">
+              <input type="number" class="form-control phone" name="phone" placeholder="Phone Number" (keypress)="key($event)">
             
           </div>
 
           <div class="form-group">
             <label for="exampleInputPassword1" class="name">Password *</label>
             
-              <input type="password" class="form-control pass" name="password" (keypress)="key($event)">
+              <input type="password" class="form-control pass" name="password" placeholder="Password" (keypress)="key($event)">
             
           </div>
 
           <div>
             <label for="exampleInputAddress" class="name">Re-Enter Password *</label>
             
-              <input type="password" class="form-control" name="re-password"  (keypress)="key($event)">
+              <input type="password" class="form-control" name="re-password" placeholder="Re-enter Password" (keypress)="key($event)">
             
           </div>
-          <a href="" class="btn c">SIGN UP</a>
+          <a class="btn c">SIGN UP</a>
 
       </div>
     </div>
