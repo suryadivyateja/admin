@@ -10,7 +10,7 @@ const enroll = require('../models/organisation/enroll');
 router.post('/register_org',(req,res)=>{
     console.log(req.body);
     org.findOne({email:req.body.email},(err,user)=>{
-       if(user) res.status(400).json({success:false,msg:'email already exists'});
+       if(user) res.json({success:false,msg:'email already exists'});
        else if(!user){
            let obj = new org({
                email:req.body.email,
@@ -21,32 +21,54 @@ router.post('/register_org',(req,res)=>{
                category_id:req.body.category_id,
                status:false
            });
-           obj.save((err1,u)=>{
-               if(err1) res.status(500).json({success:false,msg:err1});
-               else res.status(202).json({success:true,msg:u});
-           });
-       } else res.status(500).json({success:false,msg:err});
+           obj.save((er1,u)=>{
+               if(u){
+                org.findOne({email:u.email},(err,user)=>{
+                    if(!user) res.json({success:false,msg:'organisation not found'});
+                    else if(user){
+                        bcrypt.compare(req.body.password,user.password,(err1,match)=>{
+                            if(err1) res.json({success:false,msg:err1});
+                            else if(!match) res.json({success:false,msg:'please check the password you entered'});
+                            else if(match){
+                                const token = jwt.sign({data:user},config.secret,{expiresIn:604800});
+                                res.json({success:true,token:token,msg:{
+                                    id:user._id,
+                                    email:user.email,
+                                    name:user.name
+                                }
+                            });
+                            }
+                        });
+                    }else res.json({success:false,msg:err});
+                });
+           
+       } else res.json({success:false,msg:er1});
     });
+}
+else res.json({success:false,msg:err});
+
+});
 });
 
 //authorize org
 router.post('/org_auth',(req,res)=>{
     org.findOne({email:req.body.email},(err,user)=>{
-        if(!user) res.status(400).json({success:false,msg:'organisation not found'});
+        if(!user) res.json({success:false,msg:'organisation not found'});
         else if(user){
             bcrypt.compare(req.body.password,user.password,(err1,match)=>{
-                if(err1) res.status(500).json({success:false,msg:err1});
+                if(err1) res.json({success:false,msg:err1});
                 else if(!match) res.json({success:false,msg:'please check the password you entered'});
                 else if(match){
                     const token = jwt.sign({data:user},config.secret,{expiresIn:604800});
-                    res.status(200).json({success:true,token:token,msg:{
+                    res.json({success:true,token:token,msg:{
                         id:user._id,
-                        email:user.email
+                        email:user.email,
+                        name:user.name
                     }
                 });
                 }
             });
-        }else res.status(500).json({success:false,msg:err});
+        }else res.json({success:false,msg:err});
     });
 });
 

@@ -20,13 +20,35 @@ router.post('/register',(req,res)=>{
                 address:req.body.address,
                 status:false
             });
-            obj.save((err1,u)=>{
-                if(err1) res.status(500).json({success:false,msg:err1});
-                else res.status(202).json({success:true,msg:u});
-            });
+            obj.save((er1,u)=>{
+                if(er1) res.json({success:false,msg:er1});
+                else if(u){
+                    User.findOne({email:u.email},(err,user)=>{
+                        if(!user) res.json({success:false,msg:'user not found'});
+                        else if(user){
+                            bcrypt.compare(req.body.password,user.password,(err1,match)=>{
+                                if(err1) res.status(500).json({success:false,msg:err1});
+                                else if(!match) res.json({success:false,msg:'please check the password you entered'});
+                                else if(match){
+                                    const token = jwt.sign({data:user},config.secret,{expiresIn:604800});
+                                    res.json({success:true,token:token,msg:{
+                                        id:user._id,
+                                        email:user.email,
+                                        userName:user.userName
+                                    }
+                                });
+                                }
+                            });
+                        }else{
+                            res.json({success:false,msg:err});
+                        }
+                    });
+                        
+                    }
+                });
         }
         else if(user) res.json({success:false,msg:'email already exists'});
-        else  res.status(500).json({success:false,msg:err}); 
+        else  res.json({success:false,msg:err}); 
           
     });
 });
@@ -34,22 +56,23 @@ router.post('/register',(req,res)=>{
 //authorize user
 router.post('/user_auth',(req,res)=>{
     User.findOne({email:req.body.email},(err,user)=>{
-        if(!user) res.status(400).json({success:false,msg:'user not found'});
+        if(!user) res.json({success:false,msg:'user not found'});
         else if(user){
             bcrypt.compare(req.body.password,user.password,(err1,match)=>{
                 if(err1) res.status(500).json({success:false,msg:err1});
                 else if(!match) res.json({success:false,msg:'please check the password you entered'});
                 else if(match){
                     const token = jwt.sign({data:user},config.secret,{expiresIn:604800});
-                    res.status(200).json({success:true,token:token,msg:{
+                    res.json({success:true,token:token,msg:{
                         id:user._id,
-                        email:user.email
+                        email:user.email,
+                        userName:user.userName
                     }
                 });
                 }
             });
         }else{
-            res.status(500).json({success:false,msg:err});
+            res.json({success:false,msg:err});
         }
     });
 });
