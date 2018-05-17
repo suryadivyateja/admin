@@ -25,9 +25,10 @@ address;
         } else {
           this.userService.getLocation(this.lat, this.long).subscribe(res => {
             this.address = res.results[0].formatted_address;
-          })
+            localStorage.setItem('address',this.address);
+          });
         }
-      })
+      });
     }
 
   }

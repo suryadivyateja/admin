@@ -1,9 +1,7 @@
 <div class="ma">
   <div class="n">
-    <div class="form-group">
-      <label for="">Location</label>
-      <input type="text" class="form-control" [(ngModel)]="address">
-      <a class="btn btn-success"(click)="geolocate()">fvv</a>
-    </div>
+   <input type="text" class="form-contr" placeholder="set the location" maxlength="0" [(ngModel)]="address">
+   <div class="i_t" (click)="geolocate()"><i class="fa fa-location-arrow"></i>
+   </div>
   </div>
 </div>
