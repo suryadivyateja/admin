@@ -1,7 +1,53 @@
 <div class="ma">
-  <div class="n">
-   <input type="text" class="form-contr" placeholder="set the location" maxlength="0" [(ngModel)]="address">
-   <div class="i_t" (click)="geolocate()"><i class="fa fa-location-arrow"></i>
-   </div>
+  <div class="m">
+    <div class="n">
+        <input type="text" class="form-contr" placeholder="set the location" maxlength="0" [(ngModel)]="address1">
+        <div class="i_t" (click)="geolocate()"><i class="fa fa-location-arrow"></i>
+        </div>
+        <a class="long-a" (click)="next()"><i class="fa fa-long-arrow-right"></i>   </a>
+    </div>
+    <div class="text-box">
+        <div class="text-main">
+            <div class="home" (click)="title($event)">
+                <div class="home-ico">
+                    <i class="fa fa-home"></i>
+                </div>
+                <div class="home-t">
+                    <h5>Home</h5>
+                </div>
+            </div>
+            <div class="office" (click)="title($event)">
+                <div class="office-ico aft">
+                    <i class="fa fa-briefcase"></i>
+                </div>
+                <div class="office-t">
+                    <h5>Office</h5>
+                </div>
+            </div>
+            <div class="other" (click)="title($event)">
+                <div class="other-ico aft-ico">
+                    <i class="fa fa-globe"></i>
+                </div>
+                <div class="other-t">
+                    <h5>Other</h5>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+  </div>
+  <div class="i_c">
+    <div class="i_c_g">
+      <span id="ican">I CAN GIVE :</span> 
+      <input list="browsers" id="selected" [(ngModel)]="selected_i"  />
+<datalist id="browsers">
+        <option *ngFor="let c of categories" value="{{c}}">{{c}}</option>
+</datalist>
+<p id="se"></p>
+    <div class="i_c_g_s">
+        <a class="i_s" (click)="next1()"><i class="fa fa-arrow-circle-right"></i>
+        </a>
+    </div>
   </div>
 </div>

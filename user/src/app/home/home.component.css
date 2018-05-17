@@ -1,4 +1,5 @@
 .n{
+   
     position: absolute;
     top: 50%;
     left: 50%;
@@ -6,9 +7,8 @@
   }
   .ma{
     background: #F7F7F7;
-  min-height: 90vh;
-  z-index: 15;
-  
+    min-height: 90vh;
+    z-index: 15;
   }
   .form-contr{
     background: white;
@@ -25,7 +25,7 @@
   }
   div.i_t{
     position: absolute;
-    right: 20px;
+    right: 16px;
     top: 12px;
   
   }
@@ -38,3 +38,141 @@
     color: white;
     font-size: 16px;
   }
+  i.fa-long-arrow-right{
+    font-size: 40px;
+    color: #3897c1;
+    cursor: pointer;
+  }
+  .long-a{
+    position: absolute;
+    right: -18%;
+    top: 13%;
+  
+  }
+  .text-box{
+    background:white;
+    border: 1px solid #ddd;
+    border-radius: 25px 0px 25px 0px;
+    width: 300px;
+    height: 60px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  .text-main{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    cursor: pointer;
+  }
+  .home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .office{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .other{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .home-ico,.office-ico,.other-ico{
+    font-size: 130%;
+  }
+  .home-ico::after{
+    content: '';
+    position: absolute;
+    top:50%;
+    left: 10%;
+    width: 38px;
+    height: 2px;
+    background: #3897c1;
+  }
+  .aft::after{
+    content: '';
+    position: absolute;
+    top:50%;
+    left: 44%;
+    width: 38px;
+    height: 2px;
+    background: #3897c1;
+  }
+  .aft-ico::after{
+    content: '';
+    position: absolute;
+    top:50%;
+    left: 77%;
+    width: 38px;
+    height: 2px;
+    background: #3897c1;
+  }
+  .home-t h5,.office-t h5,.other-t h5{
+    font-size: 90%;
+  }
+  .home:hover{
+    color: #3897c1;
+  }
+  .office:hover{
+    color: #3897c1;
+  }
+  .other:hover{
+    color: #3897c1;
+  }
+  .acti{
+    color: #3897c1;
+  }
+.i_c{
+  display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  
+}
+span#ican{
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: .15em;
+}
+input#selected {
+  /* margin-bottom: 1em; */
+  padding: .25em;
+  border: 0;
+  border-bottom: 2px solid currentcolor; 
+  /* font-weight: bold; */
+  letter-spacing: .15em;
+  border-radius: 0;
+}
+input#selected:focus,input#selectedt:active {
+    outline: 0;
+    border-bottom-color: red;
+  }
+  .i_c_g_s{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .i_s{
+    margin-top: 20px;
+  }
+  .i_s i.fa{
+    font-size: 35px;
+    color: #3897c1;
+    cursor: pointer;
+  }
+  p#se{
+    color: red;
+    font-size:14px;
+  }
+ 
+
+  

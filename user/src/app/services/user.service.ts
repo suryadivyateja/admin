@@ -28,7 +28,13 @@ registerUser(obj){
   header.append('content-type', 'application/json');
   return this.http.post(this.host+'/user/register', obj,{headers: header})
   .map(res=>res.json());
-
 }
+postAddress(obj){
+  const header = new Headers();
+  header.append('content-type', 'application/json');
+  return this.http.post(this.host+'/user/post_address', obj,{headers: header})
+  .map(res=>res.json());
+}
+
 
 }
