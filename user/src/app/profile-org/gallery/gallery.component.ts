@@ -85,13 +85,15 @@ z_i='';
     var w = $(e.target).attr('class');
     console.log(w);
     $('img').removeClass('b_image');
-    $(w).addClass('b_image');
+    $(e.target).addClass('b_image');
     $('.d_i_z').addClass('n_b');
     this.p_b='';
-    if(w.hasClass){
+    if($(e.target).hasClass('d_g_image')){
       $('.p_d_b').css('display','flex');  
       this.p_b=d;
       // console.log(this.p_b);
+    }else{
+      $('.p_d_b').css('display','none');  
     }
   }
   d_g_b(e){
