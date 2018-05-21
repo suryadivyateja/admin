@@ -1,0 +1,47 @@
+  <div class="wrap" [ngStyle]="{'background':wrapper}">
+  </div>
+  <div class="p">
+  <div class="pro">
+  <div class="pro_pic">
+      <img src="{{wrapper1}}" alt="">
+    </div>
+  </div>
+  <div class="p_r">
+    <div class="p_n">
+      <div class="n">
+          <h2>enfsnnfnk bf</h2>
+          <p class="text-muted">jgnjreg</p>
+      </div>
+      <div class="n_r">
+        <a class="btn btn-md">Enroll</a>
+        <a class="btn btn-md w">WishList</a>
+      </div> 
+    </div>
+    <div class="cate">
+      <div class="c_ic acti" (click)="c_click($event)">
+         <div class="c_ic_icon"><i class="fa fa-book"></i></div> 
+         <div class="c_ic_text"><p class="text-muted">Info</p></div> 
+      </div>
+      <div class="c_ic1" (click)="c_click($event)">
+          <div class="c_ie_icon"><i class="fa fa-image"></i>
+          </div>
+          <div class="c_ie_text"> <p class="text-muted">Images</p> </div>
+       </div>
+       <div class="c_ic2" (click)="c_click($event)">
+          <div class="c_id_icon"><i class="fa fa-folder-open"></i>
+          </div>
+          <div class="c_id_text"> <p class="text-muted">Videos</p> </div>
+       </div>
+       <div class="c_ic3" (click)="c_click($event)">
+          <div class="c_if_icon"><i class="fa fa-asterisk"></i>
+          </div>
+          <div class="c_if_text">
+           <p class="text-muted">Requirements</p>
+          </div>
+       </div>
+    </div>
+    <div class="rou">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,11 +1,33 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const multer = require('multer');
+const Path = require('path');
+const shortid = require('shortid');
 const config = require('../config/database');
 const org = require('../models/organisation/organisation');
 const category = require('../models/organisation/category');
 const enroll = require('../models/organisation/enroll');
+const album = require('../models/organisation/album');
 
+var storage = multer.diskStorage({
+    // destination
+    destination: function (req, file, cb) {
+      cb(null, './uploads/')
+    },
+    filename: function (req, file, cb) {
+      cb(null, Date.now()+Path.extname(file.originalname));
+    }
+  });
+  var upload = multer({ storage: storage });
+
+  router.post('/upload_pro',upload.array('pics[]'),(req,res)=>{
+      var data=[];
+    req.files.forEach(element=>{
+       data.push({image:`http://localhost:3000/image/${element.filename}`});
+    })
+    res.json({success:true,msg:data});
+})
 //org registration
 router.post('/register_org',(req,res)=>{
     console.log(req.body);
@@ -252,6 +274,68 @@ router.get('/delete_enrolled/:id',(req,res)=>{
     enroll.findByIdAndRemove({_id:req.params.id},(err,data)=>{
         if(err) res.json({success:false,msg:err});
         else res.json({success:true,msg:'deleted successfully'});
+    });
+});
+//create albums
+router.post('/create_album',(req,res)=>{
+    console.log(req.body);
+            var obj= new album({
+                org_id:req.body.org_id,
+                name:req.body.name,
+            });
+            obj.save((err2,da)=>{
+                if(err2) res.json({success:false,msg:err2});
+                else {
+                    res.json({success:true,msg:da})
+                }
+            });
+        });
+//get albums
+router.get('/get_albums_by_org_id/:id',(req,res)=>{
+    album.find({org_id:req.params.id},(err,data)=>{
+        if(err) res.json({success:false,msg:err});
+        else {
+            res.json(({success:true,msg:data}));
+        }
+    });
+});
+//upload to albums
+router.post('/upload_pics_to_album',(req,res)=>{
+    console.log(req.body);
+    var pics=[];
+     req.body.pics.forEach(element=>{
+        element.id = shortid.generate();
+        pics.push(element);
+    });
+    album.findOne({org_id:req.body.org_id},(err,data)=>{
+        if(data){
+            album.findByIdAndUpdate({_id:req.body.id},{$pushAll:{images:pics}},(err1,d)=>{
+                if(err1) res.json({success:false,msg:err1});
+                else res.json({success:true,msg:'successfully uploaded'});
+            })
+        }else{
+            res.json({success:false,smg:err});
+        }
+    })
+});
+//get album by album id
+router.get('/get_albums_by_id/:id',(req,res)=>{
+    album.findById({_id:req.params.id},(err,data)=>{
+        if(err) res.json({success:false,msg:err});
+        else {
+            res.json(({success:true,msg:data}));
+        }
+    });
+});
+//delete pics from album by id
+router.post('/delete_pic_by_id',(req,res)=>{
+    album.findOne({org_id:req.body.org_id},(err,data)=>{
+        if(data){
+            album.findByIdAndUpdate({_id:req.body.id},{$pull:{images:{id:req.body.p_id}}},(err1,d)=>{
+                if(err1) res.json({success:false,msg:err1});
+                else res.json({success:true,msg:d});
+            });
+        }
     });
 });
 

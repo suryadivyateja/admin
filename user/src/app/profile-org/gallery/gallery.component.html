@@ -1,0 +1,38 @@
+<div class="g">
+    <div class="p_d_b">
+        <a ><i class="fa fa-eye" (click)="d_g_b($event)"></i></a>
+        <a ><i class="fa fa-trash" (click)="d_g_b($event)"></i></a>
+        <a><i class="fa fa-info-circle" (click)="d_g_b($event)"></i></a>  
+      </div>
+  <div>
+    <a class="btn btn-sm g_d">Delete</a>
+  <a class="btn btn-sm u">Upload</a>
+  <input type="file" class="u_i" accept="image/jpeg,image/jpg" (change)="upload_i($event)" multiple>
+  <div class="p_i">
+  <div class="p_im">
+    <div class="p_im_t">
+  <div class="p_im_p" *ngFor="let p of p_images">
+    <img src="{{p}}" alt="">
+  </div>
+ </div>
+<div class="p_im_b">
+  <a class="btn btn-sm canc" (click)="cancel_p_i()">cancel</a>
+  <a class="btn btn-sm subm" (click)="upload()">submit</a>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="d_g">
+    <div class="d_i" *ngFor="let d of d_images" (click)="preview(d,$event)">
+      <img src="{{d.image}}" class="d_g_image" alt="">
+      <div class="d_i_z">
+          <div class="d_i_zi">  
+            <img src="{{z_i}}" alt="">
+          </div>
+          <div class="d_i_zb"><a><i class="fa fa-times" (click)="close_zi()"></i></a></div> 
+      </div>
+     
+    </div>
+    </div>

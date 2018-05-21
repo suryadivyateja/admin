@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { ValidateService } from '../services/validate.service';
+import { Router } from '@angular/router';
+import { Http } from '@angular/http';
+import { OrgService } from '../services/org.service';
 declare var $:any;
 @Component({
   selector: 'app-home',
@@ -9,7 +12,7 @@ declare var $:any;
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private userService:UserService,private validateService:ValidateService) { }
+  constructor(private orgService:OrgService,private http:Http, private userService:UserService,private validateService:ValidateService,private router:Router) { }
 location;
 lat;
 long;
@@ -18,11 +21,15 @@ address1;
 titl;
 selected_i='';
 categories;
+i_c;
+myFiles;
   ngOnInit() {
     this.categories=['money','clothes','food'];
   }
+
   title(e){
    var t = $(e.target).parent().attr('class');
+   
    if(t.includes('home')){
     this.titl = 'home';
     $('div').removeClass('acti');
@@ -46,6 +53,7 @@ categories;
         if (this.location === undefined || this.location === null) {
         } else {
           this.userService.getLocation(this.lat, this.long).subscribe(res => {
+            // console.log(res)
             this.address = res.results[0].formatted_address;
             this.address1=(res.results[0].formatted_address).substr(0,34)+'....';
             localStorage.setItem('address',this.address);
@@ -71,7 +79,9 @@ categories;
   next1(){
     if(this.validateService.validateInput(this.selected_i)){
       if(this.categories.includes(this.selected_i.toLowerCase())){
-        $('.i_c').css('display','none');
+        this.i_c=this.selected_i;
+        console.log(this.i_c);
+        this.router.navigate(['/categories']);
       }else{
         $('p#se').html('currently,organisations dont have this type of request.')
         .css('margin-top','10px');

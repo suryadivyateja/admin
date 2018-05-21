@@ -1,0 +1,33 @@
+<div class="im_f">
+  <a class="btn btn-sm im_b" (click)="open_cf()"><i class="fa fa-plus"></i> New Folder
+  </a>
+  <div class="pop">
+    <div class="pop_m">
+      <div class="pop_m1">
+        <div>
+          <h5>New Folder</h5>
+        </div>
+        <div class="pop_m1_m">
+          <a (click)="close_cf()"><i class="fa fa-times"></i></a>
+        </div>
+      </div>
+      <div class="pop_in">
+        <input type="text" name="" id="" placeholder="Enter Folder Name" (keyup)="keypre($event)" [(ngModel)]="f_name">
+      <div id="error"></div>      
+      </div>
+      <div class="pop_bu">
+          <a class="btn btn-sm c" (click)="close_cf()">cancel</a>
+        <button class="btn btn-sm" [disabled]="!button_status" (click)="create_cf()">create</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="im_folders">
+  <div class="im_folder" *ngFor="let f of folders" routerLink="../gallery/{{f._id}}">
+    <a class="im_folder_ico"> <i class="fa fa-folder"></i></a>
+    <p class="text-secondary">{{f.name}}</p>
+  </div>
+
+
+</div>
+

@@ -39,7 +39,14 @@ const org_schema = mongoose.Schema({
     category_id:{
         type:String,
         required:true
+    },
+    reqs:{
+        type:Array
+    },
+    em_req:{
+        type:String
     }
+
 },{
     toObject: {
     virtuals: true

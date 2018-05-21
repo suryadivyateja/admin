@@ -3,6 +3,7 @@ import { AdminService } from './services/admin.service';
 import { ValidateService } from './services/validate.service';
 import { UserService } from './services/user.service';
 import { OrgService } from './services/org.service';
+import { Router } from '@angular/router';
 declare var $:any;
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ declare var $:any;
 })
 export class AppComponent {
   title = 'app';
-  constructor(private orgService:OrgService, private userService:UserService, private adminService:AdminService,private validateService:ValidateService){}
+  constructor(private router:Router, private orgService:OrgService, private userService:UserService, private adminService:AdminService,private validateService:ValidateService){}
   u_s_email;
   u_s_password;
   u_sp_email;
@@ -161,7 +162,7 @@ qe=[];
   }
   o_signin(){
     this.qe=[];
-    $('o_#serr').html('');
+    $('#o_serr').html('');
     if(this.validateService.validateInput(this.o_s_email) && this.validateService.validateInput(this.o_s_password)){
       var obj = {
         email:this.o_s_email,
@@ -174,12 +175,13 @@ qe=[];
       }
       else {
         localStorage.setItem('token',res.token);
-        localStorage.setItem('org',JSON.stringify(res.msg));
+        localStorage.setItem('user',JSON.stringify(res.msg));
         this.qe.push(res.msg.name);
         console.log(this.qe);
         $('.back-pop1').css('display','none');
         $('.right-navi').css('display','none');
         $('.right-navi.rig').css('display','flex').css('left','-91px');  
+        this.router.navigate([`/org-profile/${res.msg.id}`]);  
       }
       })
     }else{
@@ -192,7 +194,6 @@ qe=[];
           $('#o_serr').html('please enter the password').css('margin-top','-10px')
           .css('margin-bottom','5px');
             break;
-      
         default:
           break;
       }
@@ -222,12 +223,13 @@ qe=[];
       }
       else if(res.success === true){
         localStorage.setItem('token',res.token);
-        localStorage.setItem('org',JSON.stringify(res.msg));
+        localStorage.setItem('user',JSON.stringify(res.msg));
         this.qe.push(res.msg.name);
         console.log(this.qe);
         $('.back-pop1').css('display','none');
         $('.right-navi').css('display','none');
-        $('.right-navi.rig').css('display','flex').css('left','-91px');    
+        $('.right-navi.rig').css('display','flex').css('left','-91px');
+        this.router.navigate([`/org-profile/${res.msg.id}`]);    
       }
       });
     });
@@ -271,6 +273,13 @@ qe=[];
       }
     }
   
+  }
+  logout(){
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    $('.right-navi').css('display','flex');
+    $('.right-navi.rig').css('display','none').css('left','0px');
+    
   }
 
 }
