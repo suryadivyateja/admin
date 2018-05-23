@@ -49,4 +49,7 @@ export class OrgService {
     return this.http.post(this.host+'/org/delete_pic_by_id',obj,{headers:header})
     .map(res=>res.json());
   }
+  getAlbumsByName(name){
+    return this.http.get(this.host+'/org/get_albums_by_name/'+ name).map(res=>res.json());
+  }
 }

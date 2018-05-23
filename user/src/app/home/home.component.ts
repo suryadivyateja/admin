@@ -16,6 +16,8 @@ export class HomeComponent implements OnInit {
 location;
 lat;
 long;
+lat2;
+long2;
 address;
 address1;
 titl;
@@ -24,9 +26,27 @@ categories;
 i_c;
 myFiles;
   ngOnInit() {
+    console.log(this.distance());
     this.categories=['money','clothes','food'];
   }
-
+  rad(x) {
+    return x * Math.PI / 180;
+  };
+  distance() {
+    var lat2 =17.4370593
+    var lon2=78.4458482;
+    var lat1=17.4468499;
+    var lon1=78.39137219999999
+      var R = 6378137; // Earth’s mean radius in meter
+      var dLat = this.rad(lat2 - lat1);
+      var dLong = this.rad(lon2 - lon1);
+      var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(this.rad(lat1) * Math.cos(this.rad(lat2))) *
+        Math.sin(dLong / 2) * Math.sin(dLong / 2);
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      var d = R * c;
+       return d;
+  }
   title(e){
    var t = $(e.target).parent().attr('class');
    
@@ -45,8 +65,10 @@ myFiles;
    }
   }
   geolocate(){
+    
     if(navigator.geolocation){
       navigator.geolocation.getCurrentPosition(position=>{
+        console.log(position);
         this.location = position.coords;
         this.lat=position.coords.latitude;
         this.long=position.coords.longitude;

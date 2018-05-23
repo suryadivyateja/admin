@@ -181,7 +181,7 @@ qe=[];
         $('.back-pop1').css('display','none');
         $('.right-navi').css('display','none');
         $('.right-navi.rig').css('display','flex').css('left','-91px');  
-        this.router.navigate([`/org-profile/${res.msg.id}`]);  
+        this.router.navigate(['/org-profile']);  
       }
       })
     }else{

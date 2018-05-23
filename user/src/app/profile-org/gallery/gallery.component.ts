@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { OrgService } from '../../services/org.service';
 import { ActivatedRoute } from '@angular/router';
 import { ProfileOrgComponent } from '../profile-org.component';
-import * as viewer from 'viewerjs';
+import { Router } from '@angular/router';
+import { RouteService } from '../../services/route.service';
 declare var $:any;
 @Component({
   selector: 'app-gallery',
@@ -10,8 +11,8 @@ declare var $:any;
   styleUrls: ['./gallery.component.css']
 })
 export class GalleryComponent implements OnInit {
-
-  constructor(private p:ProfileOrgComponent, private orgService:OrgService,private route:ActivatedRoute) { 
+  constructor(private rse:RouteService, private router:Router, private p:ProfileOrgComponent, private orgService:OrgService,private route:ActivatedRoute) { 
+  
   }
 image_list=[];
 url;
@@ -20,19 +21,29 @@ g_id;
 d_images=[];
 p_b;
 z_i='';
+r;
+g_name;
+al_list=[];
   ngOnInit() {
+    this.route.params.subscribe(g=>{
+      this.g_name=g.id;
+      this.orgService.getAlbumsByName(this.g_name).subscribe(res=>{
+        this.g_id = res.msg._id;
+        this.d_images=res.msg.images;
+      })
+      this.orgService.getAlbumsByOrg_Id(this.p.id).subscribe(r=>{
+      this.al_list=r.msg;
+      console.log(r.msg)
+      })
+    });
     $('.d_i_z').css('display','none');
     $('.p_d_b').css('display','none');
     $('.u_i').css('display','none');
     $('a.u').click(function(){
       $('.u_i').trigger('click');
     });
-    this.route.params.subscribe(g=>{
-      this.g_id=g.id;
-    })
-    this.orgService.getAlbumsById(this.g_id).subscribe(res=>{
-      this.d_images=res.msg.images;
-    })
+    
+    
   }
   upload_i(e){
     this.p_images=[];

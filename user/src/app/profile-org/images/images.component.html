@@ -23,11 +23,9 @@
   </div>
 </div>
 <div class="im_folders">
-  <div class="im_folder" *ngFor="let f of folders" routerLink="../gallery/{{f._id}}">
+  <div class="im_folder" *ngFor="let f of folders" routerLink="../gallery/{{f.name}}" [replaceUrl]="true" >
     <a class="im_folder_ico"> <i class="fa fa-folder"></i></a>
     <p class="text-secondary">{{f.name}}</p>
   </div>
-
-
 </div>
 

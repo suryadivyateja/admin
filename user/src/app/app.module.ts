@@ -19,11 +19,12 @@ import { ImagesComponent } from './profile-org/images/images.component';
 import { VideosComponent } from './profile-org/videos/videos.component';
 import { RequirementsComponent } from './profile-org/requirements/requirements.component';
 import { GalleryComponent } from './profile-org/gallery/gallery.component';
+import { RouteService } from './services/route.service';
 const routes:Routes = [
   {path:'',redirectTo:'/home',pathMatch:'full'},
   {path:'home',component:HomeComponent},
   {path:'categories',component:CategoriesComponent},
-  {path:'org-profile/:id',
+  {path:'org-profile',
   component:ProfileOrgComponent,
   children:[
     {path:'',redirectTo:'info',pathMatch:'full'},
@@ -54,7 +55,7 @@ const routes:Routes = [
     HttpModule,
     ImageViewerModule.forRoot()
   ],
-  providers: [AdminService,AuthGuard,ValidateService,UserService,OrgService],
+  providers: [AdminService,AuthGuard,ValidateService,UserService,OrgService,RouteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

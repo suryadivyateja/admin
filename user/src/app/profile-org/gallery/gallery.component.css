@@ -1,3 +1,11 @@
+.ere{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    color: red;
+
+}
 .g{
     width: 100%;
     padding: 20px;

@@ -327,6 +327,15 @@ router.get('/get_albums_by_id/:id',(req,res)=>{
         }
     });
 });
+//get album by album id
+router.get('/get_albums_by_name/:name',(req,res)=>{
+    album.findOne({name:req.params.name},(err,data)=>{
+        if(err) res.json({success:false,msg:err});
+        else {
+            res.json(({success:true,msg:data}));
+        }
+    });
+});
 //delete pics from album by id
 router.post('/delete_pic_by_id',(req,res)=>{
     album.findOne({org_id:req.body.org_id},(err,data)=>{

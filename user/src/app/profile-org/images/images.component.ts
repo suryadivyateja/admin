@@ -16,11 +16,10 @@ export class ImagesComponent implements OnInit {
   o_id;
   albums = [];
   a_names = [];
-  constructor(private p: ProfileOrgComponent, private route: ActivatedRoute, private orgService: OrgService, private validateService: ValidateService) {
+  constructor( private p: ProfileOrgComponent, private route: ActivatedRoute, private orgService: OrgService, private validateService: ValidateService) {
   }
 
   ngOnInit() {
-    console.log(this.p.id);
     this.orgService.getAlbumsByOrg_Id(this.p.id).subscribe(res => {
       this.folders = res.msg;
       res.msg.forEach(element => {
