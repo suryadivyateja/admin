@@ -39,7 +39,8 @@ router.post('/register_org',(req,res)=>{
                name:req.body.name,
                phone:req.body.phone,
                password:bcrypt.hashSync(req.body.password,10),
-               address:req.body.address,
+               lat:req.body.lat,
+               lon:req.body.lon,
                category_id:req.body.category_id,
                status:false
            });
@@ -142,7 +143,7 @@ router.get('/find_org_by_email/:email',(req,res)=>{
 });
 //get all organisations
 router.get('/get_all_orgs',(req,res)=>{
-    org.find({},(err,data)=>{
+    org.find({}).populate('category').exec((err,data)=>{
         if(err) res.json({success:false,msg:err});
         else res.json({success:true,msg:data});
     })
@@ -347,7 +348,13 @@ router.post('/delete_pic_by_id',(req,res)=>{
         }
     });
 });
-
+//emergency requirement
+router.post('/em_req',(req,res)=>{
+    org.findByIdAndUpdate({_id:req.body._id},{$set:{em_req:req.body.em_req}},(err,data)=>{
+        if(err) res.json({success:false,msg:err});
+        else res.json({success:true,msg:'successfully updated'});
+    })
+})
 
 
 module.exports = router;

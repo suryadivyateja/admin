@@ -1,3 +1,12 @@
+.org_pro{
+    width: 100%;
+    /* height: 93vh; */
+    background: #F0F0F0
+    
+}
+h2{
+    font-size: 1.5rem !important;
+}
 .wrap{
     position: relative;
     width: 100%;
@@ -6,12 +15,15 @@
 .p{
     display: flex;
     width: 100%;
+    height: 13vh;
+    background: #F8F8F8;
+    border-bottom: 1px solid #F8F8F8;
+    margin-bottom: 2vh;
 }
 .pro{
     width: 30%;
     padding-left: 8%;
-    height: 100vh;
-    background: #FAFAFA;
+    
 }
 .pro_pic{
     position: absolute;
@@ -33,7 +45,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 20px;
+    padding: 5px;
     /* border-bottom: 1px solid #F6F6F6; */
 }
 .p_n h2{
@@ -58,38 +70,46 @@ a.btn.btn-md.w{
     margin-left: 15px !important;
     background: #D9534F !important;
 }
-.cate{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    border: 1px solid #F6F6F6;
+.row{
+    margin-left: 0% !important;
+    margin-right: 0% !important;
 }
-.c_ic,.c_ic1,.c_ic2,.c_ic3{
-    padding-left: 80px;
-    padding-right: 80px;
-    padding-top:10px;
-    padding-bottom: 10px; 
+.o_p_l{
+    padding-right: 2%;
+    height: 80vh;
+}
+.org_pro_left{
+    background: #FFFFFF;
+}
+.menu_left{
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    padding: 5%;
+}
+.item{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    letter-spacing: 1px;
+    margin-bottom: 5%;
     cursor: pointer;
 }
-.c_ic div.c_ic_icon,.c_ic1 div.c_ie_icon,.c_ic2 div.c_id_icon,.c_ic3 div.c_if_icon{
-    font-size: 25px;
-
+.item span{
+    color: #b0b8bd;
+    margin-right: 5%;
 }
-.c_ic .text-muted,.c_ic1 .text-muted,.c_ic2 .text-muted,.c_ic3 .text-muted{
-    font-size: 13px;
-    margin-bottom: 0px !important;
-}
-.acti{
-    background: #F6F6F6;
-    color: #3AB0E5;
-}
-.rou{
+.pull-rig{
     width: 100%;
-    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+.o_p_r{
+    background: #ffffff;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    max-height: 80vh;
     overflow: auto;
 }
 

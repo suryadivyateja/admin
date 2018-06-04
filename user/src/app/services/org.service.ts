@@ -52,4 +52,13 @@ export class OrgService {
   getAlbumsByName(name){
     return this.http.get(this.host+'/org/get_albums_by_name/'+ name).map(res=>res.json());
   }
+  emReq(obj){
+    let header = new Headers();
+    header.append('content-type','application/json');
+    return this.http.post(this.host+'/org/em_req',obj,{headers:header})
+    .map(res=>res.json());
+  }
+  getOrgById(id){
+    return this.http.get(this.host+'/org/find_org_by_id/'+ id).map(res=>res.json());
+  }
 }

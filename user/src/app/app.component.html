@@ -159,10 +159,8 @@
             <label for="exampleInputEmail1" class="name">Email *</label>
             
               <input type="email" class="form-contro email" name="email" placeholder="example@yourmail.com" [(ngModel)]="o_sp_email"
-              >
-            
+              >         
           </div>
-
           <div>
             <label for="exampleInputEmail1" class="name">Phone *</label>
             
@@ -191,8 +189,8 @@
             <label for="exampleInputAddress" class="name">Address *</label>
             
               <input type="text" class="form-contro" name="address" placeholder="Address" 
-              [(ngModel)]="o_sp_address"
-              >  
+              [(ngModel)]="address1" maxlength="0">
+              <div> <i class="fa fa-location-arrow" (click)="geolocate()"></i></div>  
           </div>
           <div>
             <label for="exampleInputAddress" class="name">Category *</label>

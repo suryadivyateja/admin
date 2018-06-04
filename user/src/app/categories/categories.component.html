@@ -1,3 +1,98 @@
-<p>
-  categories works!
-</p>
+<div class="main-c">
+  <div class="row">
+    <div class="col-3 col-sm-3">
+        <div class="l_b">
+            <div class="l_b1"></div>
+            <div class="l_b2"></div>
+            <div class="l_b3"></div>
+          </div>
+      <div class="left">
+        
+      <div class="left-div">
+        <h4 class="text-center l_t">Category</h4>
+        <div class="cate text-center">
+          <div class="cate_1">
+            <div class="cate_2">
+              Health 
+            </div>
+            <div class="cate_3">
+              <img src="https://images.pexels.com/photos/356040/pexels-photo-356040.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="cate text-center" style="background:#97D9F5">
+            <div class="cate_1">
+                <div class="cate1_2">
+                    <img src="https://images.pexels.com/photos/207756/pexels-photo-207756.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+                  </div>
+              <div class="cate1_3">
+                Education
+              </div>
+              
+            </div>
+          </div>
+          <div class="cate text-center" style="background:#9C7C5C">
+              <div class="cate_1">
+                <div class="cate_2">
+                  Disabled
+                </div>
+                <div class="cate_3">
+                  <img src="https://images.pexels.com/photos/735656/pexels-photo-735656.jpeg?auto=compress&cs=tinysrgb&h=350" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="cate text-center" style="background:lightgreen">
+                <div class="cate_1">
+                    <div class="cate1_2">
+                        <img src="https://images.pexels.com/photos/890507/pexels-photo-890507.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+                      </div>
+                  <div class="cate1_3">
+                    Food Stamps
+                  </div>
+                 
+                </div>
+              </div>
+              <div class="cate text-center" style="background:#F4AF5F">
+                  <div class="cate_1">
+                    <div class="cate_2">
+                      Utility Assistance
+                    </div>
+                    <div class="cate_3">
+                      <img src="https://images.pexels.com/photos/343460/pexels-photo-343460.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+                    </div>
+                  </div>
+                </div>
+              
+      </div>
+    </div>
+    </div>
+    <div class="col-sm-9 right">
+      <div class="row">
+        <div class="col-sm-4 org_m" *ngFor="let o of arr2">
+          <div class="org">
+            <div class="org_d">
+              <div class="org_d_img">
+                <img src="https://images.pexels.com/photos/1061583/pexels-photo-1061583.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="">
+              </div>
+              <div class="org_d_t">
+               <p class="p_t">{{o.name}}</p>
+               <p class="p_c">{{o.category[0].cat_name}}</p>
+              </div>
+              <div class="org_d_des">
+                  <p class="p_t">Urgent Requirement</p>
+                  <p class="text-muted"><i class="fa fa-check-circle"></i> Money </p>
+                </div>
+              <div class="org_d_buttons">
+                <a class="btn btn-md btn-success en">Enroll</a>
+                <a class="wishlist"><i class="fa fa-heart"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+  </div>
+  
+</div>

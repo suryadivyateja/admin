@@ -31,8 +31,23 @@ export class AppComponent {
   selected_cat='';
   categories=[];
 cat_id;
+lat;
+lon;
 qe=[];
+address;
+address1;
+user_d;
   ngOnInit(){
+    if(localStorage.getItem('user')){
+      this.user_d=JSON.parse(localStorage.getItem('user'));
+      this.qe.push(this.user_d.name);
+      $('.right-navi').css('display','none');
+        $('.right-navi.rig').css('display','flex').css('left','-91px'); 
+    }else{
+      $('.right-navi').css('display','flex');
+      $('.right-navi.rig').css('display','none'); 
+
+    }
     this.adminService.getAllCategories().subscribe(res=>{
       this.categories = res.msg;
     })
@@ -107,6 +122,25 @@ qe=[];
       }
     }
   }
+  geolocate(){
+    
+    if(navigator.geolocation){
+      navigator.geolocation.getCurrentPosition(position=>{
+        console.log(position);
+        this.lat=position.coords.latitude;
+        this.lon=position.coords.longitude;
+        if (this.lat === undefined || this.lat === null) {
+        } else {
+          this.userService.getLocation(this.lat, this.lon).subscribe(res => {
+            console.log(res);
+            this.address = res.results[0].formatted_address;
+            this.address1=(res.results[0].formatted_address).substr(0,32)+'....';
+           
+          });
+        }
+      })
+    }
+  }
   signup(){
     this.qe=[];
     $('#ser').html('');
@@ -117,7 +151,6 @@ qe=[];
         email:this.u_sp_email,
         phone:this.u_sp_phone,
         password:this.u_sp_rp,
-
       }
       this.userService.registerUser(obj).subscribe(res=>{
         console.log(res);
@@ -204,7 +237,7 @@ qe=[];
     this.cat_id='';
     $('#o_ser').html('');
        
-    if(this.validateService.validateInput(this.o_sp_name) && this.validateService.validateInput(this.o_sp_email) && this.validateService.validateInput(this.o_sp_phone) && this.validateService.validateInput(this.o_sp_password) && this.validateService.validateInput(this.o_sp_rp) && this.validateService.validateInput(this.o_sp_address) && this.validateService.validateInput(this.selected_cat)){
+    if(this.validateService.validateInput(this.o_sp_name) && this.validateService.validateInput(this.o_sp_email) && this.validateService.validateInput(this.o_sp_phone) && this.validateService.validateInput(this.o_sp_password) && this.validateService.validateInput(this.o_sp_rp) && this.validateService.validateInput(this.address1) && this.validateService.validateInput(this.selected_cat)){
       if(this.o_sp_password === this.o_sp_rp){  
         this.adminService.getCatByName(this.selected_cat).subscribe(r=>{
           this.cat_id=r.msg._id 
@@ -213,7 +246,8 @@ qe=[];
         email:this.o_sp_email,
         phone:this.o_sp_phone,
         password:this.o_sp_rp,
-        address:this.o_sp_address,
+        lat:this.lat,
+        lon:this.lon,
         category_id:this.cat_id
       }
       this.orgService.registerOrg(obj).subscribe(res=>{
@@ -229,7 +263,7 @@ qe=[];
         $('.back-pop1').css('display','none');
         $('.right-navi').css('display','none');
         $('.right-navi.rig').css('display','flex').css('left','-91px');
-        this.router.navigate([`/org-profile/${res.msg.id}`]);    
+        this.router.navigate(['/org-profile']);      
       }
       });
     });
@@ -259,8 +293,8 @@ qe=[];
           $('#o_ser').html('please re-enter the password').css('margin-top','-10px')
           .css('margin-bottom','5px');
             break;
-            case this.validateService.validateInput(this.o_sp_address):
-          $('#o_ser').html('please re-enter the address').css('margin-top','-10px')
+            case this.validateService.validateInput(this.address1):
+          $('#o_ser').html('please enter the address').css('margin-top','-10px')
           .css('margin-bottom','5px');
             break;
             case this.validateService.validateInput(this.selected_cat):

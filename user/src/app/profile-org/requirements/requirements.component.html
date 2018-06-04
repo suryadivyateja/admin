@@ -1,3 +1,30 @@
-<p>
-  requirements works!
-</p>
+<div class="row">
+<div class="col-sm-6 re_l">
+  <p>Please select the urgent requirement for the organisation.</p>
+    <div class="dropdown">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+         Urgent Requirement
+        </button>
+        <div class="dropdown-menu ">
+          <div class="dropdown-item re_dr "(click)="selected($event)">
+            <p class="re_dr_p">Money</p> 
+            <div class="re_dr_1"><i class="fa fa-check"></i></div>
+          </div>
+          <div class="dropdown-item re_dr" (click)="selected($event)">
+            <p class="re_dr_p">Food</p>  
+              <div class="re_dr_1"><i class="fa fa-check"></i></div>
+            </div>
+            <div class="dropdown-item re_dr" (click)="selected($event)">
+              <p class="re_dr_p">Clothes</p>  
+                <div class="re_dr_1"><i class="fa fa-check"></i></div>
+              </div>
+        </div>
+      </div>
+      <span id="errors"></span>
+      <a class="btn btn-md btn-success re_l_sub" (click)="u_sub()">Submit</a>
+      <div class="re_l_show">
+        {{u_r}}
+        <a class="re_l_check"><i class="fa fa-check"></i></a>
+      </div>
+</div>
+</div>

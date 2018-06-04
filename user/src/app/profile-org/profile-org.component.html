@@ -1,3 +1,4 @@
+  <div class="org_pro">
   <div class="wrap" [ngStyle]="{'background':wrapper}">
   </div>
   <div class="p">
@@ -17,7 +18,7 @@
         <a class="btn btn-md w">WishList</a>
       </div> 
     </div>
-    <div class="cate">
+    <!-- <div class="cate">
       <div class="c_ic acti" (click)="c_click($event)">
          <div class="c_ic_icon"><i class="fa fa-book"></i></div> 
          <div class="c_ic_text"><p class="text-muted">Info</p></div> 
@@ -39,9 +40,44 @@
            <p class="text-muted">Requirements</p>
           </div>
        </div>
-    </div>
-    <div class="rou">
-      <router-outlet></router-outlet>
+    </div> -->
+  </div>
+</div>
+    <div class="row">
+      <div class="col-sm-3 o_p_l">
+          <div class="org_pro_left">
+            <div class="menu_left">
+              <div class="item item1" (click)="c_click($event)">
+                <span><i class="fa fa-book"></i></span>
+                Info
+                <div class="pull-rig"><i class="fa fa-check"></i></div>
+              </div>
+              <div class="item item2" (click)="c_click($event)">
+                  <span><i class="fa fa-image"></i></span>
+                  Images
+                  <div class="pull-rig"><i class="fa fa-check"></i></div>
+                </div>
+                <div class="item item3" (click)="c_click($event)">
+                    <span><i class="fa fa-folder-open"></i></span>
+                    Videos
+                    <div class="pull-rig"><i class="fa fa-check"></i></div>
+                  </div>
+                  <div class="item item4" (click)="c_click($event)">
+                      <span><i class="fa fa-asterisk"></i></span>
+                      Requirements
+                      <div class="pull-rig"><i class="fa fa-check"></i></div>
+                    </div>
+            </div>
+            </div>
+      </div>
+      <div class="col-sm-9 o_p_r">
+      <div class="rou">
+          <router-outlet></router-outlet>
     </div>
   </div>
+    </div>
+    
+   
+  
+
 </div>

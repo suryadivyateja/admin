@@ -20,10 +20,6 @@ const org_schema = mongoose.Schema({
     picture:{
         type:String
     },
-    address:{
-        type:String,
-        required:true
-    },
     images:{
         type:Array
     },
@@ -45,6 +41,12 @@ const org_schema = mongoose.Schema({
     },
     em_req:{
         type:String
+    },
+    lat:{
+        type:Number,
+    },
+    lon:{
+        type:Number
     }
 
 },{
@@ -59,6 +61,7 @@ const org_schema = mongoose.Schema({
   org_schema.virtual('category',{
       ref:'category',
       localField:'category_id',
-      foreignField:'_id'
+      foreignField:'_id',
+      justone:true
   })
 const org = module.exports = mongoose.model('org',org_schema);

@@ -1,0 +1,41 @@
+.re_l{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.btn.btn-primary.dropdown-toggle{
+    box-shadow: none !important;
+}
+.re_dr{
+    display: flex;
+    flex-direction: row;
+}
+.re_dr_1{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-top: 6px;
+}
+.re_dr_p{
+    margin-bottom: 0px;
+    cursor: pointer;
+}
+.re_l_sub{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.re_l_show{
+    background: #F0F0F0;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    padding: 2%;
+}
+#errors{
+    color: red;
+}
+.fa.fa-check{
+    color: green;
+}

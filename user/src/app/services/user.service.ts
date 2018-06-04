@@ -2,15 +2,22 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { tokenNotExpired } from 'angular2-jwt';
+import { Router } from '@angular/router';
 @Injectable()
 export class UserService {
 
-  constructor(private http:Http) { 
+  constructor(private http:Http,private router:Router) { 
    
   }
   host='http://localhost:3000';
   loggedIn() {
     return tokenNotExpired();
+  }
+  verify_location(){
+    if(localStorage.getItem('lat') && localStorage.getItem('lon')){
+    }else {
+      this.router.navigate(['/home']);
+    }
   }
   getLocation(lat: number, long: number) {
     // tslint:disable-next-line:max-line-length
